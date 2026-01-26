@@ -18,7 +18,7 @@ class BookController extends Controller
                     $q->where('name', 'like', "%{$search}%")
                         ->orWhere('auteur', 'like', "%{$search}%")
                         ->orWhere('status', 'like', "%{$search}%")
-                        ->orWhere('livres', 'like', "%{$search}%");
+                        ->orWhere('location', 'like', "%{$search}%");
                 });
             });
 
@@ -48,7 +48,7 @@ class BookController extends Controller
             'name' => 'required|string|max:255',
             'auteur' => 'required|string',
             'status' => 'required|string',
-            'livres' => 'required|string',
+            'location' => 'required|string',
         ]);
 
         Book::create($validated);
@@ -77,7 +77,7 @@ class BookController extends Controller
             'name' => 'required|string|max:255',
             'auteur' => 'required|string',
             'status' => 'required|string',
-            'livres' => 'required|string',
+            'location' => 'required|string',
         ]);
 
         $book->update($validated);

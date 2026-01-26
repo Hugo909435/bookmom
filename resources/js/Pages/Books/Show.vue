@@ -29,7 +29,7 @@ defineProps({
                             <strong>Status:</strong> {{ book.status }}
                         </div>
                         <div class="mb-4">
-                            <strong>Livres:</strong> {{ book.livres }}
+                            <strong>Location:</strong> {{ book.location }}
                         </div>
 
                         <Link

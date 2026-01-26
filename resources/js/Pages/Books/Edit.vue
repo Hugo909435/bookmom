@@ -14,7 +14,7 @@ const form = useForm({
     name: props.book.name,
     auteur: props.book.auteur,
     status: props.book.status,
-    livres: props.book.livres,
+    location: props.book.location,
 });
 
 const submit = () => {
@@ -72,15 +72,15 @@ const submit = () => {
                             </div>
 
                             <div class="mb-4">
-                                <InputLabel for="livres" value="Livres" />
+                                <InputLabel for="location" value="Location" />
                                 <TextInput
-                                    id="livres"
-                                    v-model="form.livres"
+                                    id="location"
+                                    v-model="form.location"
                                     type="text"
                                     class="mt-1 block w-full"
                                     required
                                 />
-                                <InputError :message="form.errors.livres" class="mt-2" />
+                                <InputError :message="form.errors.location" class="mt-2" />
                             </div>
 
                             <div class="flex items-center gap-4">

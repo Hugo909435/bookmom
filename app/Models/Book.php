@@ -13,6 +13,6 @@ class Book extends Model
         'name',
         'auteur',
         'status',
-        'livres',
+        'location',
     ];
 }

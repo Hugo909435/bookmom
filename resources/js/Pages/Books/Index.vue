@@ -110,8 +110,8 @@ const deleteBook = (id) => {
                                     <div class="text-sm text-gray-700 mt-1">{{ book.status }}</div>
                                 </div>
                                 <div>
-                                    <div class="text-xs text-gray-500 uppercase font-medium">Livres</div>
-                                    <div class="text-sm text-gray-700 mt-1">{{ book.livres }}</div>
+                                    <div class="text-xs text-gray-500 uppercase font-medium">Location</div>
+                                    <div class="text-sm text-gray-700 mt-1">{{ book.location }}</div>
                                 </div>
                             </div>
 
@@ -163,7 +163,7 @@ const deleteBook = (id) => {
                                         Status
                                     </th>
                                     <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                        Livres
+                                        Location
                                     </th>
                                     <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                                         Actions
@@ -175,7 +175,7 @@ const deleteBook = (id) => {
                                     <td class="px-6 py-4 whitespace-nowrap font-medium text-gray-900">{{ book.name }}</td>
                                     <td class="px-6 py-4 whitespace-nowrap text-gray-700">{{ book.auteur }}</td>
                                     <td class="px-6 py-4 whitespace-nowrap text-gray-700">{{ book.status }}</td>
-                                    <td class="px-6 py-4 whitespace-nowrap text-gray-700">{{ book.livres }}</td>
+                                    <td class="px-6 py-4 whitespace-nowrap text-gray-700">{{ book.location }}</td>
                                     <td class="px-6 py-4 whitespace-nowrap text-sm font-medium">
                                         <Link
                                             :href="route('books.show', book.id)"

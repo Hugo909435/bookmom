@@ -16,7 +16,7 @@ return new class extends Migration
             $table->string('name');
             $table->longText('auteur');
             $table->string('status');
-            $table->string('livres');
+            $table->string('location');
             $table->timestamps();
         });
     }
