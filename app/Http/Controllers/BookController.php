@@ -17,7 +17,7 @@ class BookController extends Controller
                 $query->where(function ($q) use ($search) {
                     $q->where('name', 'like', "%{$search}%")
                         ->orWhere('auteur', 'like', "%{$search}%")
-                        ->orWhere('statut', 'like', "%{$search}%")
+                        ->orWhere('status', 'like', "%{$search}%")
                         ->orWhere('livres', 'like', "%{$search}%");
                 });
             });
@@ -47,7 +47,7 @@ class BookController extends Controller
         $validated = $request->validate([
             'name' => 'required|string|max:255',
             'auteur' => 'required|string',
-            'statut' => 'required|string',
+            'status' => 'required|string',
             'livres' => 'required|string',
         ]);
 
@@ -76,7 +76,7 @@ class BookController extends Controller
         $validated = $request->validate([
             'name' => 'required|string|max:255',
             'auteur' => 'required|string',
-            'statut' => 'required|string',
+            'status' => 'required|string',
             'livres' => 'required|string',
         ]);
 

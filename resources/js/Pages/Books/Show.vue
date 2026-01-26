@@ -26,7 +26,7 @@ defineProps({
                             <strong>Auteur:</strong> {{ book.auteur }}
                         </div>
                         <div class="mb-4">
-                            <strong>Statut:</strong> {{ book.statut }}
+                            <strong>Status:</strong> {{ book.status }}
                         </div>
                         <div class="mb-4">
                             <strong>Livres:</strong> {{ book.livres }}

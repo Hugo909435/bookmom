@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('name');
             $table->longText('auteur');
-            $table->string('statut');
+            $table->string('status');
             $table->string('livres');
             $table->timestamps();
         });

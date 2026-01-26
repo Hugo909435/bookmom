@@ -14,15 +14,15 @@ class StatsController extends Controller
         $totalBooks = Book::count();
         $uniqueAuthors = Book::distinct('auteur')->count('auteur');
         $uniqueNames = Book::distinct('name')->count('name');
-        $uniqueStatuts = Book::distinct('statut')->count('statut');
+        $uniqueStatus = Book::distinct('status')->count('status');
         $uniqueLieux = Book::distinct('livres')->count('livres');
 
-        // Livres par statut
-        $booksByStatus = Book::select('statut', DB::raw('count(*) as count'))
-            ->groupBy('statut')
+        // Livres par status
+        $booksByStatus = Book::select('status', DB::raw('count(*) as count'))
+            ->groupBy('status')
             ->orderByDesc('count')
             ->get()
-            ->mapWithKeys(fn($item) => [$item->statut => $item->count])
+            ->mapWithKeys(fn($item) => [$item->status => $item->count])
             ->toArray();
 
         // Livres par lieu (maison, voisin, mamie, etc.)
@@ -49,15 +49,15 @@ class StatsController extends Controller
             ->get()
             ->toArray();
 
-        // Statistiques croisées : Statut par lieu
-        $statusByLocation = Book::select('livres', 'statut', DB::raw('count(*) as count'))
-            ->groupBy('livres', 'statut')
+        // Statistiques croisées : Status par lieu
+        $statusByLocation = Book::select('livres', 'status', DB::raw('count(*) as count'))
+            ->groupBy('livres', 'status')
             ->orderBy('livres')
             ->orderByDesc('count')
             ->get()
             ->groupBy('livres')
             ->map(function ($items) {
-                return $items->mapWithKeys(fn($item) => [$item->statut => $item->count])->toArray();
+                return $items->mapWithKeys(fn($item) => [$item->status => $item->count])->toArray();
             })
             ->toArray();
 
@@ -69,14 +69,14 @@ class StatsController extends Controller
             ->mapWithKeys(fn($item) => [$item->livres => $item->count])
             ->toArray();
 
-        // Top 5 combinaisons auteur + statut
-        $topAuthorStatus = Book::select('auteur', 'statut', DB::raw('count(*) as count'))
-            ->groupBy('auteur', 'statut')
+        // Top 5 combinaisons auteur + status
+        $topAuthorStatus = Book::select('auteur', 'status', DB::raw('count(*) as count'))
+            ->groupBy('auteur', 'status')
             ->orderByDesc('count')
             ->limit(5)
             ->get()
             ->map(fn($item) => [
-                'label' => $item->auteur . ' (' . $item->statut . ')',
+                'label' => $item->auteur . ' (' . $item->status . ')',
                 'count' => $item->count
             ])
             ->toArray();
@@ -89,7 +89,7 @@ class StatsController extends Controller
             ->sortDesc()
             ->toArray();
 
-        // Pourcentages par statut
+        // Pourcentages par status
         $statusPercentages = [];
         if ($totalBooks > 0) {
             foreach ($booksByStatus as $status => $count) {
@@ -108,7 +108,7 @@ class StatsController extends Controller
         // Statistiques d'auteurs
         $authorsStats = Book::select('auteur')
             ->selectRaw('count(*) as total_books')
-            ->selectRaw('count(distinct statut) as different_statuts')
+            ->selectRaw('count(distinct status) as different_status')
             ->selectRaw('count(distinct livres) as different_locations')
             ->groupBy('auteur')
             ->orderByDesc('total_books')
@@ -121,7 +121,7 @@ class StatsController extends Controller
                 'total' => $totalBooks,
                 'uniqueAuthors' => $uniqueAuthors,
                 'uniqueNames' => $uniqueNames,
-                'uniqueStatuts' => $uniqueStatuts,
+                'uniqueStatus' => $uniqueStatus,
                 'uniqueLieux' => $uniqueLieux,
                 'booksByStatus' => $booksByStatus,
                 'booksByLocation' => $booksByLocation,

@@ -9,7 +9,7 @@ import TextInput from '@/Components/TextInput.vue';
 const form = useForm({
     name: '',
     auteur: '',
-    statut: '',
+    status: '',
     livres: '',
 });
 
@@ -56,15 +56,15 @@ const submit = () => {
                             </div>
 
                             <div class="mb-4">
-                                <InputLabel for="statut" value="Statut" />
+                                <InputLabel for="status" value="Status" />
                                 <TextInput
-                                    id="statut"
-                                    v-model="form.statut"
+                                    id="status"
+                                    v-model="form.status"
                                     type="text"
                                     class="mt-1 block w-full"
                                     required
                                 />
-                                <InputError :message="form.errors.statut" class="mt-2" />
+                                <InputError :message="form.errors.status" class="mt-2" />
                             </div>
 
                             <div class="mb-4">

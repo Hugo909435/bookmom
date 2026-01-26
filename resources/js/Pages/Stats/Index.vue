@@ -9,7 +9,7 @@ const props = defineProps({
     stats: Object,
 });
 
-// Graphique des statuts (Pie Chart)
+// Graphique des status (Pie Chart)
 const statusChartData = computed(() => ({
     labels: Object.keys(props.stats.booksByStatus),
     datasets: [{
@@ -89,7 +89,7 @@ const authorsLocationChartData = computed(() => ({
     }],
 }));
 
-// Top combinaisons auteur + statut
+// Top combinaisons auteur + status
 const authorStatusChartData = computed(() => ({
     labels: props.stats.topAuthorStatus.map(item => item.label),
     datasets: [{
@@ -209,12 +209,12 @@ const authorStatusChartData = computed(() => ({
                             <p v-else class="text-center text-gray-500 py-8">Aucune donnée</p>
                         </div>
 
-                        <!-- Livres par statut -->
+                        <!-- Livres par status -->
                         <div class="bg-white overflow-hidden shadow-sm rounded-lg p-4 sm:p-6">
                             <PieChart
                                 v-if="Object.keys(stats.booksByStatus).length > 0"
                                 :data="statusChartData"
-                                title="📚 Répartition par statut"
+                                title="📚 Répartition par status"
                             />
                             <p v-else class="text-center text-gray-500 py-8">Aucune donnée</p>
                         </div>
@@ -244,9 +244,9 @@ const authorStatusChartData = computed(() => ({
                             </div>
                         </div>
 
-                        <!-- Pourcentages par statut -->
+                        <!-- Pourcentages par status -->
                         <div class="bg-white overflow-hidden shadow-sm rounded-lg p-6">
-                            <h4 class="font-semibold text-gray-800 mb-4">Par statut</h4>
+                            <h4 class="font-semibold text-gray-800 mb-4">Par status</h4>
                             <div class="space-y-3">
                                 <div v-for="(percentage, status) in stats.statusPercentages" :key="status">
                                     <div class="flex justify-between text-sm mb-1">
@@ -292,12 +292,12 @@ const authorStatusChartData = computed(() => ({
                             <p v-else class="text-center text-gray-500 py-8">Aucune donnée</p>
                         </div>
 
-                        <!-- Top combinaisons auteur + statut -->
+                        <!-- Top combinaisons auteur + status -->
                         <div class="bg-white overflow-hidden shadow-sm rounded-lg p-4 sm:p-6">
                             <BarChart
                                 v-if="stats.topAuthorStatus.length > 0"
                                 :data="authorStatusChartData"
-                                title="Top 5 - Auteur + Statut"
+                                title="Top 5 - Auteur + Status"
                             />
                             <p v-else class="text-center text-gray-500 py-8">Aucune donnée</p>
                         </div>
@@ -314,7 +314,7 @@ const authorStatusChartData = computed(() => ({
                                 <tr>
                                     <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Auteur</th>
                                     <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Total livres</th>
-                                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Statuts différents</th>
+                                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Status différents</th>
                                     <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Lieux différents</th>
                                 </tr>
                                 </thead>
@@ -322,7 +322,7 @@ const authorStatusChartData = computed(() => ({
                                 <tr v-for="author in stats.authorsStats" :key="author.auteur">
                                     <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">{{ author.auteur }}</td>
                                     <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-700">{{ author.total_books }}</td>
-                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-700">{{ author.different_statuts }}</td>
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-700">{{ author.different_status }}</td>
                                     <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-700">{{ author.different_locations }}</td>
                                 </tr>
                                 </tbody>

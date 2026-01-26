@@ -106,8 +106,8 @@ const deleteBook = (id) => {
 
                             <div class="grid grid-cols-2 gap-3">
                                 <div>
-                                    <div class="text-xs text-gray-500 uppercase font-medium">Statut</div>
-                                    <div class="text-sm text-gray-700 mt-1">{{ book.statut }}</div>
+                                    <div class="text-xs text-gray-500 uppercase font-medium">Status</div>
+                                    <div class="text-sm text-gray-700 mt-1">{{ book.status }}</div>
                                 </div>
                                 <div>
                                     <div class="text-xs text-gray-500 uppercase font-medium">Livres</div>
@@ -160,7 +160,7 @@ const deleteBook = (id) => {
                                         Auteur
                                     </th>
                                     <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                        Statut
+                                        Status
                                     </th>
                                     <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                                         Livres
@@ -174,7 +174,7 @@ const deleteBook = (id) => {
                                 <tr v-for="book in books" :key="book.id">
                                     <td class="px-6 py-4 whitespace-nowrap font-medium text-gray-900">{{ book.name }}</td>
                                     <td class="px-6 py-4 whitespace-nowrap text-gray-700">{{ book.auteur }}</td>
-                                    <td class="px-6 py-4 whitespace-nowrap text-gray-700">{{ book.statut }}</td>
+                                    <td class="px-6 py-4 whitespace-nowrap text-gray-700">{{ book.status }}</td>
                                     <td class="px-6 py-4 whitespace-nowrap text-gray-700">{{ book.livres }}</td>
                                     <td class="px-6 py-4 whitespace-nowrap text-sm font-medium">
                                         <Link
