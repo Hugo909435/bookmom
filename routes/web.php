@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\BookController;
+use App\Http\Controllers\MovieController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\StatsController;
 use Illuminate\Foundation\Application;
@@ -26,6 +27,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
     })->name('dashboard');
 
     Route::resource('books', BookController::class);
+    Route::resource('movies', MovieController::class);
     Route::get('/stats', [StatsController::class, 'index'])->name('stats.index');
 
 

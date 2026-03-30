@@ -32,6 +32,9 @@ const showingNavigationDropdown = ref(false);
                                 <NavLink :href="route('books.index')" :active="route().current('books.*')">
                                     Livres
                                 </NavLink>
+                                <NavLink :href="route('movies.index')" :active="route().current('movies.*')">
+                                    Films
+                                </NavLink>
                                 <NavLink :href="route('stats.index')" :active="route().current('stats.*')">
                                     Statistiques
                                 </NavLink>
@@ -125,16 +128,13 @@ const showingNavigationDropdown = ref(false);
                 >
                     <div class="space-y-1 pb-3 pt-2">
                         <!-- AJOUT DES LIENS MANQUANTS -->
-                        <ResponsiveNavLink
-                            :href="route('books.index')"
-                            :active="route().current('books.*')"
-                        >
+                        <ResponsiveNavLink :href="route('books.index')" :active="route().current('books.*')">
                             Livres
                         </ResponsiveNavLink>
-                        <ResponsiveNavLink
-                            :href="route('stats.index')"
-                            :active="route().current('stats.*')"
-                        >
+                        <ResponsiveNavLink :href="route('movies.index')" :active="route().current('movies.*')">
+                            Films
+                        </ResponsiveNavLink>
+                        <ResponsiveNavLink :href="route('stats.index')" :active="route().current('stats.*')">
                             Statistiques
                         </ResponsiveNavLink>
                     </div>
