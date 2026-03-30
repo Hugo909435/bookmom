@@ -153,48 +153,44 @@ const deleteBook = (id) => {
                             <table class="min-w-full divide-y divide-gray-200">
                                 <thead class="bg-gray-50">
                                 <tr>
-                                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                        Nom du livre
-                                    </th>
-                                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                        Auteur
-                                    </th>
-                                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                        Status
-                                    </th>
-                                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                        Location
-                                    </th>
-                                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                        Actions
-                                    </th>
+                                    <th class="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider w-1/3">Nom du livre</th>
+                                    <th class="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider w-1/4">Auteur</th>
+                                    <th class="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Status</th>
+                                    <th class="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Location</th>
+                                    <th class="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Actions</th>
                                 </tr>
                                 </thead>
                                 <tbody class="bg-white divide-y divide-gray-200">
                                 <tr v-for="book in books" :key="book.id">
-                                    <td class="px-6 py-4 whitespace-nowrap font-medium text-gray-900">{{ book.name }}</td>
-                                    <td class="px-6 py-4 whitespace-nowrap text-gray-700">{{ book.auteur }}</td>
-                                    <td class="px-6 py-4 whitespace-nowrap text-gray-700">{{ book.status }}</td>
-                                    <td class="px-6 py-4 whitespace-nowrap text-gray-700">{{ book.location }}</td>
-                                    <td class="px-6 py-4 whitespace-nowrap text-sm font-medium">
-                                        <Link
-                                            :href="route('books.show', book.id)"
-                                            class="text-blue-600 hover:text-blue-900 mr-3"
-                                        >
-                                            Voir
-                                        </Link>
-                                        <Link
-                                            :href="route('books.edit', book.id)"
-                                            class="text-indigo-600 hover:text-indigo-900 mr-3"
-                                        >
-                                            Modifier
-                                        </Link>
-                                        <button
-                                            @click="deleteBook(book.id)"
-                                            class="text-red-600 hover:text-red-900"
-                                        >
-                                            Supprimer
-                                        </button>
+                                    <td class="px-4 py-4 max-w-xs">
+                                        <div class="font-medium text-gray-900 truncate" :title="book.name">{{ book.name }}</div>
+                                    </td>
+                                    <td class="px-4 py-4 max-w-xs">
+                                        <div class="text-gray-700 truncate" :title="book.auteur">{{ book.auteur }}</div>
+                                    </td>
+                                    <td class="px-4 py-4 whitespace-nowrap text-gray-700 text-sm">{{ book.status }}</td>
+                                    <td class="px-4 py-4 whitespace-nowrap text-gray-700 text-sm">{{ book.location }}</td>
+                                    <td class="px-4 py-4 whitespace-nowrap text-sm font-medium">
+                                        <div class="flex items-center gap-2">
+                                            <Link
+                                                :href="route('books.show', book.id)"
+                                                class="px-2 py-1 bg-blue-50 text-blue-600 rounded hover:bg-blue-100 text-xs"
+                                            >
+                                                Voir
+                                            </Link>
+                                            <Link
+                                                :href="route('books.edit', book.id)"
+                                                class="px-2 py-1 bg-indigo-50 text-indigo-600 rounded hover:bg-indigo-100 text-xs"
+                                            >
+                                                Modifier
+                                            </Link>
+                                            <button
+                                                @click="deleteBook(book.id)"
+                                                class="px-2 py-1 bg-red-50 text-red-600 rounded hover:bg-red-100 text-xs"
+                                            >
+                                                Supprimer
+                                            </button>
+                                        </div>
                                     </td>
                                 </tr>
 
