@@ -50,7 +50,7 @@ const deleteMovie = (id) => {
                 </div>
                 <Link
                     :href="route('movies.create')"
-                    class="inline-flex items-center px-3 py-2 sm:px-4 bg-blue-600 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-blue-700"
+                    class="inline-flex items-center px-3 py-2 sm:px-4 bg-red-600 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-red-700"
                 >
                     <span class="hidden sm:inline">Ajouter un film</span>
                     <span class="sm:hidden">Ajouter</span>
@@ -95,7 +95,7 @@ const deleteMovie = (id) => {
                             v-model="search"
                             type="text"
                             placeholder="Rechercher un film, réalisateur..."
-                            class="block w-full pl-10 pr-3 py-2 sm:py-3 border border-gray-300 rounded-lg bg-white placeholder-gray-500 focus:outline-none focus:ring-1 focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
+                            class="block w-full pl-10 pr-3 py-2 sm:py-3 border border-gray-300 rounded-lg bg-white placeholder-gray-500 focus:outline-none focus:ring-1 focus:ring-red-500 focus:border-red-500 sm:text-sm"
                         />
                         <button v-if="search" @click="search = ''" class="absolute inset-y-0 right-0 pr-3 flex items-center">
                             <svg class="h-5 w-5 text-gray-400 hover:text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -128,8 +128,8 @@ const deleteMovie = (id) => {
                                 </div>
                             </div>
                             <div class="flex gap-2 pt-2 border-t border-gray-200">
-                                <Link :href="route('movies.show', movie.id)" class="flex-1 text-center px-3 py-2 bg-blue-50 text-blue-600 rounded-md text-sm font-medium hover:bg-blue-100">Voir</Link>
-                                <Link :href="route('movies.edit', movie.id)" class="flex-1 text-center px-3 py-2 bg-indigo-50 text-indigo-600 rounded-md text-sm font-medium hover:bg-indigo-100">Modifier</Link>
+                                <Link :href="route('movies.show', movie.id)" class="flex-1 text-center px-3 py-2 bg-red-50 text-red-600 rounded-md text-sm font-medium hover:bg-red-100">Voir</Link>
+                                <Link :href="route('movies.edit', movie.id)" class="flex-1 text-center px-3 py-2 bg-red-50 text-red-600 rounded-md text-sm font-medium hover:bg-red-100">Modifier</Link>
                                 <button @click="deleteMovie(movie.id)" class="flex-1 px-3 py-2 bg-red-50 text-red-600 rounded-md text-sm font-medium hover:bg-red-100">Supprimer</button>
                             </div>
                         </div>
@@ -165,8 +165,8 @@ const deleteMovie = (id) => {
                                     <td class="px-4 py-4 whitespace-nowrap text-gray-700 text-sm">{{ movie.location }}</td>
                                     <td class="px-4 py-4 whitespace-nowrap text-sm font-medium">
                                         <div class="flex items-center gap-2">
-                                            <Link :href="route('movies.show', movie.id)" class="px-2 py-1 bg-blue-50 text-blue-600 rounded hover:bg-blue-100 text-xs">Voir</Link>
-                                            <Link :href="route('movies.edit', movie.id)" class="px-2 py-1 bg-indigo-50 text-indigo-600 rounded hover:bg-indigo-100 text-xs">Modifier</Link>
+                                            <Link :href="route('movies.show', movie.id)" class="px-2 py-1 bg-red-50 text-red-600 rounded hover:bg-red-100 text-xs">Voir</Link>
+                                            <Link :href="route('movies.edit', movie.id)" class="px-2 py-1 bg-red-50 text-red-600 rounded hover:bg-red-100 text-xs">Modifier</Link>
                                             <button @click="deleteMovie(movie.id)" class="px-2 py-1 bg-red-50 text-red-600 rounded hover:bg-red-100 text-xs">Supprimer</button>
                                         </div>
                                     </td>

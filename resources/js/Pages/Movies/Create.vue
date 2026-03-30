@@ -163,7 +163,7 @@ onUnmounted(() => stopScan());
                             </div>
                             <p v-if="scanError" class="mt-1 text-sm text-red-600">{{ scanError }}</p>
                             <p v-if="fetchError" class="mt-1 text-sm text-orange-600">{{ fetchError }}</p>
-                            <p v-if="fetching" class="mt-1 text-sm text-indigo-600">Recherche en cours...</p>
+                            <p v-if="fetching" class="mt-1 text-sm text-red-600">Recherche en cours...</p>
                         </div>
 
                         <div class="mb-4">
@@ -203,7 +203,7 @@ onUnmounted(() => stopScan());
                     <div class="p-6 text-gray-900">
 
                         <div v-if="scanning" class="mb-6">
-                            <video ref="videoRef" class="w-full rounded-lg border-2 border-indigo-500" style="max-height: 300px;" autoplay muted playsinline></video>
+                            <video ref="videoRef" class="w-full rounded-lg border-2 border-red-500" style="max-height: 300px;" autoplay muted playsinline></video>
                             <button type="button" @click="stopScan" class="mt-2 w-full py-2 px-4 bg-red-500 text-white rounded-md">Annuler le scan</button>
                         </div>
 
@@ -212,12 +212,12 @@ onUnmounted(() => stopScan());
                                 <InputLabel for="barcode" value="Code-barres" />
                                 <div class="flex gap-2 mt-1">
                                     <TextInput id="barcode" v-model="form.barcode" type="text" class="block w-full" placeholder="Ex: 3700173200125" />
-                                    <button type="button" @click="startScan" :disabled="scanning" class="px-3 py-2 bg-indigo-600 text-white rounded-md whitespace-nowrap">📷 Scanner</button>
+                                    <button type="button" @click="startScan" :disabled="scanning" class="px-3 py-2 bg-red-600 text-white rounded-md whitespace-nowrap">📷 Scanner</button>
                                     <button type="button" @click="searchByBarcode(false)" :disabled="fetching || !form.barcode" class="px-3 py-2 bg-gray-600 text-white rounded-md whitespace-nowrap">{{ fetching ? '...' : 'Rechercher' }}</button>
                                 </div>
                                 <p v-if="scanError" class="mt-1 text-sm text-red-600">{{ scanError }}</p>
                                 <p v-if="fetchError" class="mt-1 text-sm text-orange-600">{{ fetchError }}</p>
-                                <p v-if="fetching" class="mt-1 text-sm text-indigo-600">Recherche en cours...</p>
+                                <p v-if="fetching" class="mt-1 text-sm text-red-600">Recherche en cours...</p>
                             </div>
 
                             <div class="mb-4">
