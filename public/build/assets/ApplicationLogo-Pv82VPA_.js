@@ -1,1 +1,0 @@
-import{o as t,g as e,H as o}from"./app-BjBUxd1E.js";const p=Object.assign({inheritAttrs:!1},{__name:"ApplicationLogo",setup(r){return(s,a)=>(t(),e("img",o(s.$attrs,{src:"/assets/logo-transparent-png.png",alt:"Logo"}),null,16))}});export{p as _};

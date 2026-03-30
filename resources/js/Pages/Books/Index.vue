@@ -5,6 +5,7 @@ import { ref, watch } from 'vue';
 
 const props = defineProps({
     books: Array,
+    pendingBooks: Array,
     totalBooks: Number,
     filteredCount: Number,
     filters: Object,
@@ -59,6 +60,28 @@ const deleteBook = (id) => {
 
         <div class="py-6 sm:py-12">
             <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+
+                <!-- Section En attente -->
+                <div v-if="pendingBooks && pendingBooks.length > 0" class="mb-6 bg-orange-50 border border-orange-200 rounded-lg overflow-hidden">
+                    <div class="px-4 py-3 bg-orange-100 border-b border-orange-200 flex items-center justify-between">
+                        <h3 class="font-semibold text-orange-800">⏳ En attente de complétion ({{ pendingBooks.length }})</h3>
+                        <span class="text-xs text-orange-600">Status ou localisation manquants</span>
+                    </div>
+                    <div class="divide-y divide-orange-100">
+                        <div v-for="book in pendingBooks" :key="book.id" class="px-4 py-3 flex items-center justify-between gap-4">
+                            <div class="min-w-0">
+                                <div class="font-medium text-gray-900 truncate">{{ book.name }}</div>
+                                <div class="text-sm text-gray-500 truncate">{{ book.auteur }}</div>
+                            </div>
+                            <Link
+                                :href="route('books.edit', book.id)"
+                                class="shrink-0 px-3 py-1.5 bg-orange-500 hover:bg-orange-600 text-white text-sm rounded-md font-medium"
+                            >
+                                Compléter
+                            </Link>
+                        </div>
+                    </div>
+                </div>
 
                 <!-- Barre de recherche avec compteur -->
                 <div class="mb-6">

@@ -23,10 +23,13 @@ class BookController extends Controller
             });
 
         $books = $booksQuery->latest()->get();
-        $totalBooks = Book::count(); // Total sans filtre
+        $totalBooks = Book::count();
+        $pendingBooks = Book::whereNull('status')->orWhereNull('location')
+            ->orWhere('status', '')->orWhere('location', '')->latest()->get();
 
         return Inertia::render('Books/Index', [
-            'books' => $books,
+            'books' => $books->filter(fn($b) => !empty($b->status) && !empty($b->location))->values(),
+            'pendingBooks' => $pendingBooks,
             'totalBooks' => $totalBooks,
             'filteredCount' => $books->count(),
             'filters' => [
@@ -48,8 +51,8 @@ class BookController extends Controller
             'name' => 'required|string|max:255',
             'isbn' => 'nullable|string|max:20',
             'auteur' => 'required|string',
-            'status' => 'required|string',
-            'location' => 'required|string',
+            'status' => 'nullable|string',
+            'location' => 'nullable|string',
         ]);
 
         Book::create($validated);
