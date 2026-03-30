@@ -46,6 +46,7 @@ class BookController extends Controller
     {
         $validated = $request->validate([
             'name' => 'required|string|max:255',
+            'isbn' => 'nullable|string|max:20',
             'auteur' => 'required|string',
             'status' => 'required|string',
             'location' => 'required|string',
@@ -75,6 +76,7 @@ class BookController extends Controller
     {
         $validated = $request->validate([
             'name' => 'required|string|max:255',
+            'isbn' => 'nullable|string|max:20',
             'auteur' => 'required|string',
             'status' => 'required|string',
             'location' => 'required|string',

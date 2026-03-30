@@ -12,6 +12,7 @@ const props = defineProps({
 
 const form = useForm({
     name: props.book.name,
+    isbn: props.book.isbn ?? '',
     auteur: props.book.auteur,
     status: props.book.status,
     location: props.book.location,
@@ -35,6 +36,18 @@ const submit = () => {
                 <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                     <div class="p-6 text-gray-900">
                         <form @submit.prevent="submit">
+                            <div class="mb-4">
+                                <InputLabel for="isbn" value="ISBN" />
+                                <TextInput
+                                    id="isbn"
+                                    v-model="form.isbn"
+                                    type="text"
+                                    class="mt-1 block w-full"
+                                    placeholder="Ex: 9782070360024"
+                                />
+                                <InputError :message="form.errors.isbn" class="mt-2" />
+                            </div>
+
                             <div class="mb-4">
                                 <InputLabel for="name" value="Nom du livre" />
                                 <TextInput
