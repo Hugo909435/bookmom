@@ -234,7 +234,7 @@ onUnmounted(() => stopScan());
                 </div>
 
                 <!-- MODE NORMAL -->
-                <div v-else class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
+                <div v-else class="bg-white overflow-hidden shadow-sm rounded-xl border border-slate-200">
                     <div class="p-6 text-gray-900">
 
                         <!-- Caméra -->
