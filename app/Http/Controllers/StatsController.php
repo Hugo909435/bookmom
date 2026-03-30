@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Book;
+use App\Models\Movie;
 use Illuminate\Support\Facades\DB;
 use Inertia\Inertia;
 
@@ -116,6 +117,42 @@ class StatsController extends Controller
             ->get()
             ->toArray();
 
+        // ---- Stats Films ----
+        $totalMovies = Movie::count();
+        $uniqueRealisateurs = Movie::whereNotNull('realisateur')->where('realisateur', '!=', '')->distinct('realisateur')->count('realisateur');
+        $uniqueMovieTitres = Movie::distinct('titre')->count('titre');
+        $uniqueMovieLieux = Movie::whereNotNull('location')->where('location', '!=', '')->distinct('location')->count('location');
+
+        $moviesByStatus = Movie::whereNotNull('status')->where('status', '!=', '')
+            ->select('status', DB::raw('count(*) as count'))
+            ->groupBy('status')->orderByDesc('count')->get()
+            ->mapWithKeys(fn($item) => [$item->status => $item->count])->toArray();
+
+        $moviesByLocation = Movie::whereNotNull('location')->where('location', '!=', '')
+            ->select('location', DB::raw('count(*) as count'))
+            ->groupBy('location')->orderByDesc('count')->get()
+            ->mapWithKeys(fn($item) => [$item->location => $item->count])->toArray();
+
+        $topRealisateurs = Movie::whereNotNull('realisateur')->where('realisateur', '!=', '')
+            ->select('realisateur', DB::raw('count(*) as count'))
+            ->groupBy('realisateur')->orderByDesc('count')->limit(10)->get()->toArray();
+
+        $duplicateMovies = Movie::select('titre', DB::raw('count(*) as count'))
+            ->groupBy('titre')->having('count', '>', 1)->orderByDesc('count')->get()->toArray();
+
+        $movieStatusPercentages = [];
+        if ($totalMovies > 0) {
+            foreach ($moviesByStatus as $status => $count) {
+                $movieStatusPercentages[$status] = round(($count / $totalMovies) * 100, 1);
+            }
+        }
+        $movieLocationPercentages = [];
+        if ($totalMovies > 0) {
+            foreach ($moviesByLocation as $location => $count) {
+                $movieLocationPercentages[$location] = round(($count / $totalMovies) * 100, 1);
+            }
+        }
+
         return Inertia::render('Stats/Index', [
             'stats' => [
                 'total' => $totalBooks,
@@ -134,7 +171,19 @@ class StatsController extends Controller
                 'statusPercentages' => $statusPercentages,
                 'locationPercentages' => $locationPercentages,
                 'authorsStats' => $authorsStats,
-            ]
+            ],
+            'movieStats' => [
+                'total' => $totalMovies,
+                'uniqueRealisateurs' => $uniqueRealisateurs,
+                'uniqueTitres' => $uniqueMovieTitres,
+                'uniqueLieux' => $uniqueMovieLieux,
+                'moviesByStatus' => $moviesByStatus,
+                'moviesByLocation' => $moviesByLocation,
+                'topRealisateurs' => $topRealisateurs,
+                'duplicateMovies' => $duplicateMovies,
+                'statusPercentages' => $movieStatusPercentages,
+                'locationPercentages' => $movieLocationPercentages,
+            ],
         ]);
     }
 }
