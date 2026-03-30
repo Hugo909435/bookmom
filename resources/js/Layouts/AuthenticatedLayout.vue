@@ -72,31 +72,11 @@ const showingNavigationDropdown = ref(false);
                             </Dropdown>
                         </div>
 
-                        <!-- Hamburger -->
-                        <div class="-me-2 flex items-center sm:hidden">
-                            <button @click="showingNavigationDropdown = !showingNavigationDropdown" class="inline-flex items-center justify-center rounded-md p-2 text-slate-400 hover:bg-slate-100 hover:text-slate-600 transition-colors">
-                                <svg class="h-6 w-6" stroke="currentColor" fill="none" viewBox="0 0 24 24">
-                                    <path :class="{ hidden: showingNavigationDropdown, 'inline-flex': !showingNavigationDropdown }" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
-                                    <path :class="{ hidden: !showingNavigationDropdown, 'inline-flex': showingNavigationDropdown }" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
-                                </svg>
-                            </button>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Responsive Menu -->
-                <div :class="{ block: showingNavigationDropdown, hidden: !showingNavigationDropdown }" class="sm:hidden border-t border-slate-200">
-                    <div class="space-y-1 px-4 py-3">
-                        <ResponsiveNavLink :href="route('books.index')" :active="route().current('books.*')">Livres</ResponsiveNavLink>
-                        <ResponsiveNavLink :href="route('movies.index')" :active="route().current('movies.*')">Films</ResponsiveNavLink>
-                        <ResponsiveNavLink :href="route('stats.index')" :active="route().current('stats.*')">Statistiques</ResponsiveNavLink>
-                    </div>
-                    <div class="border-t border-slate-200 px-4 py-3">
-                        <div class="text-sm font-medium text-slate-800">{{ $page.props.auth.user.name }}</div>
-                        <div class="text-xs text-slate-500 mt-0.5">{{ $page.props.auth.user.email }}</div>
-                        <div class="mt-3 space-y-1">
-                            <ResponsiveNavLink :href="route('profile.edit')">Profil</ResponsiveNavLink>
-                            <ResponsiveNavLink :href="route('logout')" method="post" as="button">Déconnexion</ResponsiveNavLink>
+                        <!-- Nom utilisateur mobile -->
+                        <div class="flex items-center sm:hidden">
+                            <div class="w-8 h-8 bg-blue-100 rounded-full flex items-center justify-center">
+                                <span class="text-blue-700 font-semibold text-sm">{{ $page.props.auth.user.name.charAt(0).toUpperCase() }}</span>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -110,9 +90,58 @@ const showingNavigationDropdown = ref(false);
             </header>
 
             <!-- Page Content -->
-            <main>
+            <main class="pb-20 sm:pb-0">
                 <slot />
             </main>
+
+            <!-- Barre de navigation mobile (bottom nav) -->
+            <nav class="sm:hidden fixed bottom-0 left-0 right-0 bg-white border-t border-slate-200 shadow-lg z-50">
+                <div class="grid grid-cols-4 h-16">
+                    <!-- Livres -->
+                    <Link :href="route('books.index')" class="flex flex-col items-center justify-center gap-1 transition-colors"
+                        :class="route().current('books.*') ? 'text-blue-600' : 'text-slate-400'"
+                    >
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"/>
+                        </svg>
+                        <span class="text-xs font-medium">Livres</span>
+                        <span v-if="route().current('books.*')" class="absolute bottom-0 w-8 h-0.5 bg-blue-600 rounded-t-full"></span>
+                    </Link>
+
+                    <!-- Films -->
+                    <Link :href="route('movies.index')" class="flex flex-col items-center justify-center gap-1 transition-colors relative"
+                        :class="route().current('movies.*') ? 'text-blue-600' : 'text-slate-400'"
+                    >
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 4v16M17 4v16M3 8h4m10 0h4M3 12h18M3 16h4m10 0h4M4 20h16a1 1 0 001-1V5a1 1 0 00-1-1H4a1 1 0 00-1 1v14a1 1 0 001 1z"/>
+                        </svg>
+                        <span class="text-xs font-medium">Films</span>
+                        <span v-if="route().current('movies.*')" class="absolute bottom-0 w-8 h-0.5 bg-blue-600 rounded-t-full"></span>
+                    </Link>
+
+                    <!-- Statistiques -->
+                    <Link :href="route('stats.index')" class="flex flex-col items-center justify-center gap-1 transition-colors relative"
+                        :class="route().current('stats.*') ? 'text-blue-600' : 'text-slate-400'"
+                    >
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"/>
+                        </svg>
+                        <span class="text-xs font-medium">Stats</span>
+                        <span v-if="route().current('stats.*')" class="absolute bottom-0 w-8 h-0.5 bg-blue-600 rounded-t-full"></span>
+                    </Link>
+
+                    <!-- Profil -->
+                    <Link :href="route('profile.edit')" class="flex flex-col items-center justify-center gap-1 transition-colors relative"
+                        :class="route().current('profile.*') ? 'text-blue-600' : 'text-slate-400'"
+                    >
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"/>
+                        </svg>
+                        <span class="text-xs font-medium">Profil</span>
+                        <span v-if="route().current('profile.*')" class="absolute bottom-0 w-8 h-0.5 bg-blue-600 rounded-t-full"></span>
+                    </Link>
+                </div>
+            </nav>
         </div>
     </div>
 </template>
