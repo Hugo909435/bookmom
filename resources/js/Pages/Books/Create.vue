@@ -61,22 +61,9 @@ const startScan = async () => {
 
     try {
         codeReader = new BrowserMultiFormatReader();
-        const devices = await BrowserMultiFormatReader.listVideoInputDevices();
 
-        if (devices.length === 0) {
-            scanError.value = 'Aucune caméra détectée.';
-            scanning.value = false;
-            return;
-        }
-
-        const backCamera = devices.find(d =>
-            d.label.toLowerCase().includes('back') ||
-            d.label.toLowerCase().includes('rear') ||
-            d.label.toLowerCase().includes('environment')
-        ) || devices[devices.length - 1];
-
-        controls = await codeReader.decodeFromVideoDevice(
-            backCamera.deviceId,
+        controls = await codeReader.decodeFromConstraints(
+            { video: { facingMode: { ideal: 'environment' } } },
             videoRef.value,
             (result, error) => {
                 if (result) {
